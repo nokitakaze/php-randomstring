@@ -1,0 +1,49 @@
+{
+  "name": "nokitakaze/randomstring",
+  "description": "Random string generating",
+  "license": "Apache-2.0",
+  "authors": [
+    {
+      "name": "Nikita Vetrov",
+      "email": "admin@kanaria.ru",
+      "homepage": "http://kanaria.ru/",
+      "role": "Project lead"
+    }
+  ],
+  "support": {
+    "source": "https://github.com/nokitakaze/php-randomstring"
+  },
+  "keywords": [
+    "random"
+  ],
+  "minimum-stability": "beta",
+  "require": {
+    "php": "^5.4.0 || >=7.0.9"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^6.0 | ~5.7",
+    "phpbench/phpbench": "~0.13.0"
+  },
+  "conflict": {
+    "hhvm": "*"
+  },
+  "scripts": {
+    "test-cl": [
+      "vendor/bin/phpunit test --coverage-clover test/clover.xml --configuration test/phpunit.xml"
+    ],
+    "tests": [
+      "vendor/bin/phpunit test --coverage-clover test/clover.xml --configuration test/phpunit.xml --coverage-html test/html-report"
+    ],
+    "bench":[
+      "vendor/bin/phpbench run test/GeneratingBench.php --report='generator: \"table\", cols: [ \"benchmark\", \"subject\", \"revs\", \"its\", \"mem_peak\", \"sum\", \"mean\", \"stdev\"], break: [\"benchmark\"]'"
+    ]
+  },
+  "autoload": {
+    "psr-4": {
+      "NokitaKaze\\RandomString\\": "src/"
+    }
+  },
+  "config": {
+    "process-timeout": 1800
+  }
+}
