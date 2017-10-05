@@ -1,23 +1,11 @@
 language: php
 
 php:
-  - 5.6
-  - 7.0
-  - 7.1
-  - nightly
+  - hhvm-3.9
+  - hhvm-3.12
+  - hhvm-3.15
+  - hhvm-3.18
 
-matrix:
-  allow_failures:
-    - php: nightly
-  include:
-    - php: hhvm-3.9
-      env: REMOVE_XDEBUG="0" HHVM="1"
-      dist: trusty
-  fast_finish: true
-
-env:
-  - REMOVE_XDEBUG="0"
-  - REMOVE_XDEBUG="1"
 
 sudo: false
 
@@ -26,17 +14,9 @@ cache:
     - $HOME/.composer/cache
 
 before_install:
-  - if [ "$REMOVE_XDEBUG" = "1" ] && [ "$HHVM" != "1" ] && [ $(phpenv version-name) != "nightly" ]; then phpenv config-rm xdebug.ini; fi
   - composer self-update
 
 install: travis_retry composer install --no-interaction
 
 script:
-  - if [ "$HHVM" = "1" ] || [ "$REMOVE_XDEBUG" = "0" ]; then composer test-cl; fi
-
-after_script:
-  - wget https://scrutinizer-ci.com/ocular.phar
-  - if [ $(phpenv version-name) = "5.6" ] && [ "$REMOVE_XDEBUG" = "0" ]; then php ocular.phar code-coverage:upload --format=php-clover test/clover.xml --revision=$TRAVIS_COMMIT; fi
-  - if [ $(phpenv version-name) = "7.0" ] && [ "$REMOVE_XDEBUG" = "0" ]; then php ocular.phar code-coverage:upload --format=php-clover test/clover.xml --revision=$TRAVIS_COMMIT; fi
-  - if [ $(phpenv version-name) = "7.1" ] && [ "$REMOVE_XDEBUG" = "0" ]; then php ocular.phar code-coverage:upload --format=php-clover test/clover.xml --revision=$TRAVIS_COMMIT; fi
-  - composer bench
+  - composer test-cl
