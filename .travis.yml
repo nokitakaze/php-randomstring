@@ -9,8 +9,9 @@ php:
 matrix:
   allow_failures:
     - php: nightly
+    - php: hhvm
   include:
-    - php: hhvm-3.9
+    - php: hhvm
       env: REMOVE_XDEBUG="0" HHVM="1"
       dist: trusty
   fast_finish: true

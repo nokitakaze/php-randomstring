@@ -35,7 +35,7 @@
       "vendor/bin/phpunit test --coverage-clover test/clover.xml --configuration test/phpunit.xml --coverage-html test/html-report"
     ],
     "bench":[
-      "vendor/bin/phpbench run test/GeneratingBench.php --report='generator: \"table\", cols: [ \"benchmark\", \"subject\", \"revs\", \"its\", \"mem_peak\", \"sum\", \"mean\", \"stdev\"], break: [\"benchmark\"]'"
+      "vendor/bin/phpbench run test/GeneratingBench.php --report='generator: \"table\", cols: [\"subject\", \"mem_peak\", \"sum\", \"mean\", \"stdev\", \"rstdev\", \"variance\"], break: [\"benchmark\"]'"
     ]
   },
   "autoload": {
